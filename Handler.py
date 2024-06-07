@@ -32,14 +32,14 @@ class HandlerBranchCode:
         data = spark.read.csv(RUTA_OG, header=True, inferSchema=True)
         ruta_destino = os.path.join(RUTA_DEST, f'breast_cancer')
 
-        data.write.json(ruta_destino)
+        data.write.parquet(ruta_destino)
 
     @staticmethod
     def transform_data(RUTA_OG, RUTA_DEST, SPARK):
         print('Pasando a la capa Business...')
         spark = SPARK
 
-        data = spark.read.json(RUTA_OG)
+        data = spark.read.parquet(RUTA_OG)
         ruta_destino = os.path.join(RUTA_DEST, f'breast_cancer')
 
         #transformaciones
@@ -50,7 +50,7 @@ class HandlerBranchCode:
         new_cols = ["Diagnóstico","Radio medio","Textura media","Perímetro medio","Área media","Suavidad media","Compacidad media","Concavidad media","Puntos cóncavos medios","Simetría media","Dimensión fractal media","Error estándar del radio","Error estándar de la textura","Error estándar del perímetro","Error estándar del área","Error estándar de la suavidad","Error estándar de la compacidad","Error estándar de la concavidad","Error estándar de los puntos cóncavos","Error estándar de la simetría","Error estándar de la dimensión fractal","Peor radio","Peor textura","Peor perímetro","Peor área","Peor suavidad","Peor compacidad","Peor concavidad","Peor puntuación de los puntos cóncavos","Peor simetría","Peor dimensión fractal"]
         data = data.select([col(old_col).alias(new_col) for old_col, new_col in zip(old_cols, new_cols)])
 
-        data.write.json(ruta_destino)
+        data.write.parquet(ruta_destino)
 
     # @staticmethod
     # def get_kaggle():
