@@ -33,7 +33,8 @@ class HandlerBranchCode:
         segundos = date.second
 
         data = spark.read.csv(RUTA_OG, header=True, inferSchema=True)
-        ruta_destino = os.path.join(RUTA_DEST, f'cardio_{horas}-{minutos}-{segundos}')
+        ruta_destino = os.path.join(RUTA_DEST, f'cardio')
+
         data.write.json(ruta_destino)
 
         spark.stop()
@@ -43,6 +44,8 @@ class HandlerBranchCode:
     #     dataset_name = 'alphiree/cardiovascular-diseases-risk-prediction-dataset'
     #     download_path = './raw'
     #     kaggle.api.dataset_download_files(dataset_name, download_path, unzip=True)
+    #     og_name =  './raw/'+os.listdir('./raw')[0]
+    #     os.rename(og_name, './raw/cardio.csv')
 
 
 path_staging = HandlerBranchCode.partition_folder('.\\staging')
