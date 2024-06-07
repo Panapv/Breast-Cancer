@@ -1,7 +1,5 @@
 from pyspark.sql import SparkSession
-from datetime import datetime
 import os
-import pandas as pd
 # import kaggle
 
 class HandlerBranchCode:
@@ -27,17 +25,16 @@ class HandlerBranchCode:
     def clean_data(RUTA_OG, RUTA_DEST):
         spark = HandlerBranchCode.newSession('New Session')
 
-        date = datetime.now()
-        horas = date.hour
-        minutos = date.minute
-        segundos = date.second
-
         data = spark.read.csv(RUTA_OG, header=True, inferSchema=True)
-        ruta_destino = os.path.join(RUTA_DEST, f'cardio')
+        ruta_destino = os.path.join(RUTA_DEST, f'breast_cancer')
 
         data.write.json(ruta_destino)
 
         spark.stop()
+
+    @staticmethod
+    def transform_data(RUTA_OG, RUTA_DEST):
+        return 0
 
     # @staticmethod
     # def get_kaggle():
@@ -49,4 +46,7 @@ class HandlerBranchCode:
 
 
 path_staging = HandlerBranchCode.partition_folder('.\\staging')
-HandlerBranchCode.clean_data('.\\raw\\cardio.csv', path_staging)
+HandlerBranchCode.clean_data('.\\raw\\breast_cancer.csv', path_staging)
+
+path_business = HandlerBranchCode.partition_folder('.\\business')
+HandlerBranchCode.clean_data('.\\staging\\breast_cancer', path_business)
