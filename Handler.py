@@ -1,10 +1,8 @@
 from pyspark.sql import SparkSession
-# import requests
 from datetime import datetime
 import os
-# import json
-# import urllib3
 import pandas as pd
+# import kaggle
 
 class HandlerBranchCode:
 
@@ -39,6 +37,12 @@ class HandlerBranchCode:
         data.write.json(ruta_destino)
 
         spark.stop()
+
+    # @staticmethod
+    # def get_kaggle():
+    #     dataset_name = 'alphiree/cardiovascular-diseases-risk-prediction-dataset'
+    #     download_path = './raw'
+    #     kaggle.api.dataset_download_files(dataset_name, download_path, unzip=True)
 
 
 path_staging = HandlerBranchCode.partition_folder('.\\staging')
