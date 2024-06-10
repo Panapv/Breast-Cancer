@@ -9,10 +9,16 @@ class HandlerBranchCode:
     # Create a SparkSession
     @staticmethod
     def newSession(name):
-        print('Creando nueva sesión...')
+        # Crear la sesión Spark sin imprimir el mensaje de advertencia
         spark = SparkSession.builder \
             .appName(name) \
             .getOrCreate()
+    
+        # Ajustar el nivel de registro a ERROR para eliminar el warning
+        spark.sparkContext.setLogLevel("ERROR")
+    
+        print('Creando nueva sesión...\n')
+    
         return spark
 
     # Crear carpetas por año, mes y día
@@ -27,20 +33,26 @@ class HandlerBranchCode:
     @staticmethod
     def clean_data(RUTA_OG, RUTA_DEST, SPARK):
         print('Pasando a la capa Staging...')
-        spark = SPARK
 
-        data = spark.read.csv(RUTA_OG, header=True, inferSchema=True)
-        ruta_destino = os.path.join(RUTA_DEST, f'breast_cancer')
+        data = SPARK.read.csv(os.path.join(RUTA_OG, 'breast_cancer.csv'), header=True, inferSchema=True)
+
+        # Contar el número de carpetas en el directorio de destino
+        n_directories = len([d for d in os.listdir(RUTA_DEST) if os.path.isdir(os.path.join(RUTA_DEST, d))])
+
+        ruta_destino = os.path.join(RUTA_DEST, f'breast_cancer_{n_directories}')
 
         data.write.parquet(ruta_destino)
+
+        print(f'Datos guardados en {ruta_destino}\n')
 
     @staticmethod
     def transform_data(RUTA_OG, RUTA_DEST, SPARK):
         print('Pasando a la capa Business...')
-        spark = SPARK
 
-        data = spark.read.parquet(RUTA_OG)
-        ruta_destino = os.path.join(RUTA_DEST, f'breast_cancer')
+        n_directories = len([d for d in os.listdir(RUTA_DEST) if os.path.isdir(os.path.join(RUTA_DEST, d))])
+        data = SPARK.read.parquet(os.path.join(RUTA_OG, f'breast_cancer_{n_directories}'))
+
+        ruta_destino = os.path.join(RUTA_DEST, f'breast_cancer_{n_directories}')
 
         #transformaciones
 
@@ -51,6 +63,7 @@ class HandlerBranchCode:
         data = data.select([col(old_col).alias(new_col) for old_col, new_col in zip(old_cols, new_cols)])
 
         data.write.parquet(ruta_destino)
+        print(f'Datos transformados y guardados en {ruta_destino}\n')
 
     # @staticmethod
     # def get_kaggle():
