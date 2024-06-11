@@ -6,6 +6,8 @@ def main():
     s3 = S3Client()
     spark = HandlerBranchCode.newSession('ETL - Breast Cancer')
 
+    HandlerBranchCode.get_kaggle()
+
     path_staging = HandlerBranchCode.partition_folder(os.path.join('.', 'staging'))
     staging_files_path = HandlerBranchCode.clean_data(os.path.join('.', 'raw'), path_staging, spark)
     s3.create_s3_folder('breast-cancer-s3', os.path.join('staging', staging_files_path[1]))

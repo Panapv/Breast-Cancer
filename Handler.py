@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.functions import when
 import os
-# import kaggle
+import kaggle
 
 class HandlerBranchCode:
 
@@ -70,11 +70,12 @@ class HandlerBranchCode:
 
         return ruta_destino, f'breast_cancer_{n_directories}'
 
-    # @staticmethod
-    # def get_kaggle():
-    #     print('Pasando a la capa raw...')
-    #     dataset_name = 'alphiree/cardiovascular-diseases-risk-prediction-dataset'
-    #     download_path = './raw'
-    #     kaggle.api.dataset_download_files(dataset_name, download_path, unzip=True)
-    #     og_name =  './raw/'+os.listdir('./raw')[0]
-    #     os.rename(og_name, './raw/cardio.csv')
+    @staticmethod
+    def get_kaggle():
+        print('Pasando a la capa Raw...')
+        dataset_name = 'uciml/breast-cancer-wisconsin-data'
+        download_path = './raw'
+        
+        kaggle.api.dataset_download_files(dataset_name, download_path, unzip=True)
+        og_name =  './raw/'+os.listdir('./raw')[0]
+        os.rename(og_name, './raw/breast_cancer.csv')
