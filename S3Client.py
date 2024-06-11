@@ -30,3 +30,8 @@ class S3Client:
             print("La ruta especificada no es una carpeta.")
 
         print()
+    
+    def create_s3_bucket(self, bucket_name, region='us-east-1'):
+        location = {'LocationConstraint': region}
+        self.s3_client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
+        print(f"Bucket {bucket_name} created in region {region}")
