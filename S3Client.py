@@ -31,7 +31,7 @@ class S3Client:
 
         print()
     
-    def create_s3_bucket(self, bucket_name, region='us-east-1'):
-        location = {'LocationConstraint': region}
+    def create_s3_bucket(self, bucket_name):
+        location = {'LocationConstraint': os.environ.get('AWS_REGION_NAME')}
         self.s3_client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
-        print(f"Bucket {bucket_name} created in region {region}")
+        print(f"Bucket '{bucket_name}' creado en la region: {os.environ.get('AWS_REGION_NAME')}")
