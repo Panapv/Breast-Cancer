@@ -1,0 +1,5 @@
+business/
+staging/
+.env
+__pycache__/
+pruebas.ipynb

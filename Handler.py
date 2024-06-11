@@ -43,8 +43,10 @@ class HandlerBranchCode:
 
         data.write.parquet(ruta_destino)
 
-        print(f'Datos guardados en {ruta_destino}\n')
+        print(f'Datos guardados en {ruta_destino}')
 
+        return ruta_destino, f'breast_cancer_{n_directories}'
+    
     @staticmethod
     def transform_data(RUTA_OG, RUTA_DEST, SPARK):
         print('Pasando a la capa Business...')
@@ -63,7 +65,10 @@ class HandlerBranchCode:
         data = data.select([col(old_col).alias(new_col) for old_col, new_col in zip(old_cols, new_cols)])
 
         data.write.parquet(ruta_destino)
-        print(f'Datos transformados y guardados en {ruta_destino}\n')
+
+        print(f'Datos transformados y guardados en {ruta_destino}')
+
+        return ruta_destino, f'breast_cancer_{n_directories}'
 
     # @staticmethod
     # def get_kaggle():
