@@ -6,7 +6,7 @@ def main():
     s3 = S3Client()
     spark = HandlerBranchCode.newSession('ETL - Breast Cancer')
 
-    HandlerBranchCode.get_kaggle()
+    HandlerBranchCode.get_kaggle() # Comprobar si tienes las credenciales en .kaggle
 
     path_staging = HandlerBranchCode.partition_folder(os.path.join('.', 'staging'))
     staging_files_path = HandlerBranchCode.clean_data(os.path.join('.', 'raw'), path_staging, spark)
