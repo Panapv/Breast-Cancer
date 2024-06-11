@@ -7,6 +7,8 @@ def main():
     spark = HandlerBranchCode.newSession('ETL - Breast Cancer')
 
     HandlerBranchCode.get_kaggle() # Comprobar si tienes las credenciales en .kaggle
+    s3.create_s3_folder('breast-cancer-s3', 'raw')
+    s3.upload_files('breast-cancer-s3', './raw', 'raw')
 
     path_staging = HandlerBranchCode.partition_folder(os.path.join('.', 'staging'))
     staging_files_path = HandlerBranchCode.clean_data(os.path.join('.', 'raw'), path_staging, spark)

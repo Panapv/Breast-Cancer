@@ -20,7 +20,7 @@ class S3Client:
         print(f"Carpeta {folder_name} creada en el bucket {bucket_name}\n")
 
     def upload_files(self, bucket_name, folder_path, folder_name):
-        folder_key = f'{folder_name}/'  
+        folder_key = f'{folder_name}/' 
         if os.path.isdir(folder_path):
             archivos = os.listdir(folder_path)
             for archivo in archivos:
