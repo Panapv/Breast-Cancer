@@ -1,13 +1,14 @@
 from Handler import HandlerBranchCode
+import os
 
 def main():
     spark = HandlerBranchCode.newSession('ETL - Breast Cancer')
 
-    path_staging = HandlerBranchCode.partition_folder('.\\staging')
-    HandlerBranchCode.clean_data('.\\raw', path_staging, spark)
+    path_staging = HandlerBranchCode.partition_folder(os.path.join('.', 'staging'))
+    HandlerBranchCode.clean_data(os.path.join('.', 'raw'), path_staging, spark)
 
-    path_business = HandlerBranchCode.partition_folder('.\\business')
-    HandlerBranchCode.transform_data('.\\staging', path_business, spark)
+    path_business = HandlerBranchCode.partition_folder(os.path.join('.', 'business'))
+    HandlerBranchCode.transform_data(os.path.join('.', 'staging'), path_business, spark)
 
     spark.stop()
 
