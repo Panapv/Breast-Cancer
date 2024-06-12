@@ -1,0 +1,34 @@
+2024-06-12 11:06:48,005 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Current SDK version is 0.16.5
+2024-06-12 11:06:48,005 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Configure stats pid to 17968
+2024-06-12 11:06:48,005 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Loading settings from C:\Users\vblancoc\.config\wandb\settings
+2024-06-12 11:06:48,005 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Loading settings from c:\VANESA\Breast-Cancer\model\wandb\settings
+2024-06-12 11:06:48,005 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-06-12 11:06:48,006 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-12 11:06:48,006 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-06-12 11:06:48,006 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-06-12 11:06:48,006 INFO    MainThread:17968 [wandb_setup.py:_flush():76] Applying login settings: {'api_key': '***REDACTED***'}
+2024-06-12 11:06:48,006 INFO    MainThread:17968 [wandb_init.py:_log_setup():527] Logging user logs to c:\VANESA\Breast-Cancer\model\wandb\run-20240612_110648-l9chs8wl\logs\debug.log
+2024-06-12 11:06:48,007 INFO    MainThread:17968 [wandb_init.py:_log_setup():528] Logging internal logs to c:\VANESA\Breast-Cancer\model\wandb\run-20240612_110648-l9chs8wl\logs\debug-internal.log
+2024-06-12 11:06:48,007 INFO    MainThread:17968 [wandb_init.py:_jupyter_setup():473] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x0000022DC6D0EC20>
+2024-06-12 11:06:48,007 INFO    MainThread:17968 [wandb_init.py:init():567] calling init triggers
+2024-06-12 11:06:48,007 INFO    MainThread:17968 [wandb_init.py:init():574] wandb.init called with sweep_config: {}
+config: {'dataset': 'Breast Cancer'}
+2024-06-12 11:06:48,008 INFO    MainThread:17968 [wandb_init.py:init():617] starting backend
+2024-06-12 11:06:48,008 INFO    MainThread:17968 [wandb_init.py:init():621] setting up manager
+2024-06-12 11:06:48,017 INFO    MainThread:17968 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-06-12 11:06:48,020 INFO    MainThread:17968 [wandb_init.py:init():629] backend started and connected
+2024-06-12 11:06:48,035 INFO    MainThread:17968 [wandb_run.py:_label_probe_notebook():1299] probe notebook
+2024-06-12 11:06:48,036 INFO    MainThread:17968 [wandb_run.py:_label_probe_notebook():1309] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2024-06-12 11:06:48,036 INFO    MainThread:17968 [wandb_init.py:init():721] updated telemetry
+2024-06-12 11:06:48,140 INFO    MainThread:17968 [wandb_init.py:init():754] communicating run to backend with 90.0 second timeout
+2024-06-12 11:08:19,028 ERROR   MainThread:17968 [wandb_init.py:init():780] encountered error: Run initialization has timed out after 90.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
+2024-06-12 11:08:21,064 ERROR   MainThread:17968 [wandb_init.py:init():1205] Run initialization has timed out after 90.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
+Traceback (most recent call last):
+  File "c:\Users\vblancoc\miniconda3\envs\breast-cancer\lib\site-packages\wandb\sdk\wandb_init.py", line 1187, in init
+    run = wi.init()
+  File "c:\Users\vblancoc\miniconda3\envs\breast-cancer\lib\site-packages\wandb\sdk\wandb_init.py", line 786, in init
+    raise error
+wandb.errors.CommError: Run initialization has timed out after 90.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
