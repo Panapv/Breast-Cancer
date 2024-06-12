@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Handler &mdash; Breast-Cancer-Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Breast-Cancer-Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Breast-Cancer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Breast-Cancer-Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Handler</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Handler</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">when</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">kaggle</span>
+
+<div class="viewcode-block" id="HandlerBranchCode">
+<a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode">[docs]</a>
+<span class="k">class</span> <span class="nc">HandlerBranchCode</span><span class="p">:</span>
+
+<div class="viewcode-block" id="HandlerBranchCode.newSession">
+<a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.newSession">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">newSession</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método crea una nueva sesión de Spark.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): Nombre de la sesión de Spark</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            spark: Nueva sesión de Spark</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
+            <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+        
+        <span class="c1"># Ponemos el LogLevel en ERROR para que muestre los ERRORES fatales de Spark por terminal.</span>
+        <span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">)</span>
+    
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Creando nueva sesión de Spark...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">spark</span></div>
+
+
+<div class="viewcode-block" id="HandlerBranchCode.partition_folder">
+<a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.partition_folder">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">partition_folder</span><span class="p">(</span><span class="n">RUTA</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método crea carpetas en caso de que no existan.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            RUTA (str): Ruta en la quieres crear la carpeta.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            path: Ruta de la carpeta</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">RUTA</span><span class="p">))</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="HandlerBranchCode.clean_data">
+<a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.clean_data">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">clean_data</span><span class="p">(</span><span class="n">RUTA_OG</span><span class="p">,</span> <span class="n">RUTA_DEST</span><span class="p">,</span> <span class="n">SPARK</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método limpia y guarda los datos en la capa de staging.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            RUTA_OG (str): Ruta origen de los datos.\n </span>
+<span class="sd">            RUTA_DEST (str): Ruta destino de los datos.\n </span>
+<span class="sd">            SPARK (obj): Spark session  </span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ruta_destino: Ruta del destino de los datos.\n </span>
+<span class="sd">            f&#39;breast_cancer_{n_directories}&#39;: Nueva versión de los datos tras la ejecución.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pasando a la capa Staging...&#39;</span><span class="p">)</span>
+        
+        <span class="n">data</span> <span class="o">=</span> <span class="n">SPARK</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RUTA_OG</span><span class="p">,</span> <span class="s1">&#39;breast_cancer.csv&#39;</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Contar el número de carpetas en el directorio de destino.</span>
+        <span class="n">n_directories</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">RUTA_DEST</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RUTA_DEST</span><span class="p">,</span> <span class="n">d</span><span class="p">))])</span>
+
+        <span class="n">ruta_destino</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RUTA_DEST</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;breast_cancer_</span><span class="si">{</span><span class="n">n_directories</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Guardamos los datos en formato .parquet.</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">ruta_destino</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Datos guardados en </span><span class="si">{</span><span class="n">ruta_destino</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ruta_destino</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;breast_cancer_</span><span class="si">{</span><span class="n">n_directories</span><span class="si">}</span><span class="s1">&#39;</span></div>
+
+    
+<div class="viewcode-block" id="HandlerBranchCode.transform_data">
+<a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.transform_data">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">transform_data</span><span class="p">(</span><span class="n">RUTA_OG</span><span class="p">,</span> <span class="n">RUTA_DEST</span><span class="p">,</span> <span class="n">SPARK</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método transfoma los datos para adaptarse a nuestro modelo de negocio y los guarda en la capa de business.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            RUTA_OG (str): Ruta origen de los datos.\n </span>
+<span class="sd">            RUTA_DEST (str): Ruta destino de los datos.\n </span>
+<span class="sd">            SPARK (obj): Spark session.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ruta_destino: Ruta del destino de los datos.\n </span>
+<span class="sd">            f&#39;breast_cancer_{n_directories}&#39;: Nueva versión de los datos tras la ejecución.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pasando a la capa Business...&#39;</span><span class="p">)</span>
+
+        <span class="n">n_directories</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">RUTA_DEST</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RUTA_DEST</span><span class="p">,</span> <span class="n">d</span><span class="p">))])</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">SPARK</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RUTA_OG</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;breast_cancer_</span><span class="si">{</span><span class="n">n_directories</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+
+        <span class="n">ruta_destino</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RUTA_DEST</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;breast_cancer_</span><span class="si">{</span><span class="n">n_directories</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+
+        <span class="c1"># Cambiamos la columna de diagnosis de (M/B) a (Maligno/Benigno), para facilitar la compresión de los datos a la hora de hacer búsquedas.</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;diagnosis&#39;</span> <span class="p">,</span> <span class="n">when</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;Maligno&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;Benigno&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]))</span>
+
+        <span class="c1"># Traducimos el nombre de las columnas al español. </span>
+        <span class="n">old_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span><span class="s2">&quot;radius_mean&quot;</span><span class="p">,</span><span class="s2">&quot;texture_mean&quot;</span><span class="p">,</span><span class="s2">&quot;perimeter_mean&quot;</span><span class="p">,</span><span class="s2">&quot;area_mean&quot;</span><span class="p">,</span><span class="s2">&quot;smoothness_mean&quot;</span><span class="p">,</span><span class="s2">&quot;compactness_mean&quot;</span><span class="p">,</span><span class="s2">&quot;concavity_mean&quot;</span><span class="p">,</span><span class="s2">&quot;concave points_mean&quot;</span><span class="p">,</span><span class="s2">&quot;symmetry_mean&quot;</span><span class="p">,</span><span class="s2">&quot;fractal_dimension_mean&quot;</span><span class="p">,</span><span class="s2">&quot;radius_se&quot;</span><span class="p">,</span><span class="s2">&quot;texture_se&quot;</span><span class="p">,</span><span class="s2">&quot;perimeter_se&quot;</span><span class="p">,</span><span class="s2">&quot;area_se&quot;</span><span class="p">,</span><span class="s2">&quot;smoothness_se&quot;</span><span class="p">,</span><span class="s2">&quot;compactness_se&quot;</span><span class="p">,</span><span class="s2">&quot;concavity_se&quot;</span><span class="p">,</span><span class="s2">&quot;concave points_se&quot;</span><span class="p">,</span><span class="s2">&quot;symmetry_se&quot;</span><span class="p">,</span><span class="s2">&quot;fractal_dimension_se&quot;</span><span class="p">,</span><span class="s2">&quot;radius_worst&quot;</span><span class="p">,</span><span class="s2">&quot;texture_worst&quot;</span><span class="p">,</span><span class="s2">&quot;perimeter_worst&quot;</span><span class="p">,</span><span class="s2">&quot;area_worst&quot;</span><span class="p">,</span><span class="s2">&quot;smoothness_worst&quot;</span><span class="p">,</span><span class="s2">&quot;compactness_worst&quot;</span><span class="p">,</span><span class="s2">&quot;concavity_worst&quot;</span><span class="p">,</span><span class="s2">&quot;concave points_worst&quot;</span><span class="p">,</span><span class="s2">&quot;symmetry_worst&quot;</span><span class="p">,</span><span class="s2">&quot;fractal_dimension_worst&quot;</span><span class="p">]</span>
+        <span class="n">new_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Diagnóstico&quot;</span><span class="p">,</span><span class="s2">&quot;Radio medio&quot;</span><span class="p">,</span><span class="s2">&quot;Textura media&quot;</span><span class="p">,</span><span class="s2">&quot;Perímetro medio&quot;</span><span class="p">,</span><span class="s2">&quot;Área media&quot;</span><span class="p">,</span><span class="s2">&quot;Suavidad media&quot;</span><span class="p">,</span><span class="s2">&quot;Compacidad media&quot;</span><span class="p">,</span><span class="s2">&quot;Concavidad media&quot;</span><span class="p">,</span><span class="s2">&quot;Puntos cóncavos medios&quot;</span><span class="p">,</span><span class="s2">&quot;Simetría media&quot;</span><span class="p">,</span><span class="s2">&quot;Dimensión fractal media&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar del radio&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar de la textura&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar del perímetro&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar del área&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar de la suavidad&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar de la compacidad&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar de la concavidad&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar de los puntos cóncavos&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar de la simetría&quot;</span><span class="p">,</span><span class="s2">&quot;Error estándar de la dimensión fractal&quot;</span><span class="p">,</span><span class="s2">&quot;Peor radio&quot;</span><span class="p">,</span><span class="s2">&quot;Peor textura&quot;</span><span class="p">,</span><span class="s2">&quot;Peor perímetro&quot;</span><span class="p">,</span><span class="s2">&quot;Peor área&quot;</span><span class="p">,</span><span class="s2">&quot;Peor suavidad&quot;</span><span class="p">,</span><span class="s2">&quot;Peor compacidad&quot;</span><span class="p">,</span><span class="s2">&quot;Peor concavidad&quot;</span><span class="p">,</span><span class="s2">&quot;Peor puntuación de los puntos cóncavos&quot;</span><span class="p">,</span><span class="s2">&quot;Peor simetría&quot;</span><span class="p">,</span><span class="s2">&quot;Peor dimensión fractal&quot;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">col</span><span class="p">(</span><span class="n">old_col</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">new_col</span><span class="p">)</span> <span class="k">for</span> <span class="n">old_col</span><span class="p">,</span> <span class="n">new_col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">old_cols</span><span class="p">,</span> <span class="n">new_cols</span><span class="p">)])</span>
+
+        <span class="c1"># Guardamos los datos en formato &#39;.parquet&#39;.</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">ruta_destino</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Datos transformados y guardados en </span><span class="si">{</span><span class="n">ruta_destino</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ruta_destino</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;breast_cancer_</span><span class="si">{</span><span class="n">n_directories</span><span class="si">}</span><span class="s1">&#39;</span></div>
+
+
+<div class="viewcode-block" id="HandlerBranchCode.get_kaggle">
+<a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.get_kaggle">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_kaggle</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método accede a la API de Kaggle y carga los datos en la capa raw.&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pasando a la capa Raw...&#39;</span><span class="p">)</span>
+        <span class="n">dataset_name</span> <span class="o">=</span> <span class="s1">&#39;uciml/breast-cancer-wisconsin-data&#39;</span>
+        <span class="n">download_path</span> <span class="o">=</span> <span class="s1">&#39;./data/raw&#39;</span>
+
+        <span class="c1"># En caso de que venga comprimido este método lo descomprime automaticamente con el atributo &#39;unzip=True&#39;.</span>
+        <span class="n">kaggle</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">dataset_download_files</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">download_path</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">og_name</span> <span class="o">=</span>  <span class="s1">&#39;./data/raw/&#39;</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;./data/raw&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Cambiamos el nombre del archivo a &#39;breast_cancer.csv&#39;.</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">og_name</span><span class="p">,</span> <span class="s1">&#39;./data/raw/breast_cancer.csv&#39;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, VAPEPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

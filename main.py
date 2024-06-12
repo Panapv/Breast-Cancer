@@ -3,6 +3,8 @@ from S3Client import S3Client
 import os
 
 def main():
+    """Método principal de la aplicación."""
+
     s3 = S3Client()
     spark = HandlerBranchCode.newSession('ETL - Breast Cancer')
 
