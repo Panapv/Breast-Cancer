@@ -1,6 +1,6 @@
-business/
-staging/
+data/business/
+data/staging/
 .env
 __pycache__/
 pruebas.ipynb
-raw/
+data/raw/
