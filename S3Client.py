@@ -1,6 +1,7 @@
 import boto3
 from dotenv import load_dotenv
 import os
+import botocore
  
 load_dotenv()
    
@@ -14,13 +15,10 @@ class S3Client:
             region_name=os.environ.get('AWS_REGION_NAME')
         )
 
-    def create_s3_folder(self, bucket_name, folder_name):
-        folder_key = f'{folder_name}/'  
-        self.s3_client.put_object(Bucket=bucket_name, Key=folder_key)
-        print(f"Carpeta {folder_name} creada en el bucket {bucket_name}\n")
-
     def upload_files(self, bucket_name, folder_path, folder_name):
         folder_key = f'{folder_name}/' 
+        print(f"Carpeta {folder_name} creada en el bucket {bucket_name}\n")
+        
         if os.path.isdir(folder_path):
             archivos = os.listdir(folder_path)
             for archivo in archivos:
@@ -32,6 +30,15 @@ class S3Client:
         print()
     
     def create_s3_bucket(self, bucket_name):
-        location = {'LocationConstraint': os.environ.get('AWS_REGION_NAME')}
-        self.s3_client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
-        print(f"Bucket '{bucket_name}' creado en la region: {os.environ.get('AWS_REGION_NAME')}")
+        try:
+            region = os.environ.get('AWS_REGION_NAME')
+        
+            if region == 'us-east-1':
+                self.s3_client.create_bucket(Bucket=bucket_name)
+            else:
+                location = {'LocationConstraint': region}
+                self.s3_client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
+        
+            print(f"Bucket '{bucket_name}' creado en la región: {region}\n")
+        except botocore.exceptions.ClientError as e:
+            print(f"Error occurred: {e}")

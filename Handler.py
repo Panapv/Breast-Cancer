@@ -17,7 +17,7 @@ class HandlerBranchCode:
         # Ajustar el nivel de registro a ERROR para eliminar el warning
         spark.sparkContext.setLogLevel("ERROR")
     
-        print('Creando nueva sesión...\n')
+        print('Creando nueva sesión de Spark...\n')
     
         return spark
 
