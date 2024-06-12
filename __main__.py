@@ -12,13 +12,13 @@ def main():
     HandlerBranchCode.get_kaggle() # Comprobar si tienes las credenciales en .kaggle
     s3.upload_files(bucket_name, './raw', 'raw')
 
-    path_staging = HandlerBranchCode.partition_folder(os.path.join('.', 'staging'))
-    staging_files_path = HandlerBranchCode.clean_data(os.path.join('.', 'raw'), path_staging, spark)
-    s3.upload_files(bucket_name, staging_files_path[0], os.path.join('staging', staging_files_path[1]))
+    path_staging = HandlerBranchCode.partition_folder(os.path.join('.', 'data', 'staging'))
+    staging_files_path = HandlerBranchCode.clean_data(os.path.join('.', 'data', 'raw'), path_staging, spark)
+    s3.upload_files(bucket_name, staging_files_path[0], os.path.join('data', 'staging', staging_files_path[1]))
 
-    path_business = HandlerBranchCode.partition_folder(os.path.join('.', 'business'))
-    business_files_path = HandlerBranchCode.transform_data(os.path.join('.', 'staging'), path_business, spark)
-    s3.upload_files(bucket_name, business_files_path[0], os.path.join('business', business_files_path[1]))
+    path_business = HandlerBranchCode.partition_folder(os.path.join('.', 'data', 'business'))
+    business_files_path = HandlerBranchCode.transform_data(os.path.join('.', 'data', 'staging'), path_business, spark)
+    s3.upload_files(bucket_name, business_files_path[0], os.path.join('data', 'business', business_files_path[1]))
 
     spark.stop()
 
