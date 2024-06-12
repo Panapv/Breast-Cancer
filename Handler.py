@@ -74,8 +74,8 @@ class HandlerBranchCode:
     def get_kaggle():
         print('Pasando a la capa Raw...')
         dataset_name = 'uciml/breast-cancer-wisconsin-data'
-        download_path = './raw'
+        download_path = './data/raw'
 
         kaggle.api.dataset_download_files(dataset_name, download_path, unzip=True)
-        og_name =  '.data/raw/'+os.listdir('.data/raw')[0]
-        os.rename(og_name, '.data/raw/breast_cancer.csv')
+        og_name =  './data/raw/'+os.listdir('./data/raw')[0]
+        os.rename(og_name, './data/raw/breast_cancer.csv')
