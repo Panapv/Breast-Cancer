@@ -54,7 +54,7 @@ def test_clean_data(spark_session):
         assert df.count() == 2
         assert df.filter(df.value == "foo").count() == 1
         assert df.filter(df.value == "bar").count() == 1
-"""        
+       
 def test_transform_data(spark_session):
     # Crea directorios temporales para rutas de prueba
     with tempfile.TemporaryDirectory() as ruta_og, tempfile.TemporaryDirectory() as ruta_dest:
@@ -83,7 +83,7 @@ def test_transform_data(spark_session):
         assert "Diagnóstico" in df_transformed.columns
         assert "Radio medio" in df_transformed.columns
         assert "Textura media" in df_transformed.columns
-"""
+
 def test_get_kaggle():
     # Ruta de descarga simulada y dataset simulado
     download_path = './data/raw'
