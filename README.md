@@ -29,18 +29,17 @@ The dataset used for this project is the Breast Cancer Wisconsin (Diagnostic) Da
 To run the notebooks and scripts in this repository, follow these steps:
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your_username/breast-cancer-prediction.git
-   cd breast-cancer-prediction
+   git clone https://github.com/your_username/Breast-Cancer.git
+   cd Breast-Cancer
 
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
 
-3. El archivo `kaggle.json` debe colocarse en una carpeta llamada `.kaggle` en tu directorio de inicio.<br>Asegúrate de que el archivo `kaggle.json` contenga correctamente tus credenciales de API de Kaggle.<br>Si esta carpeta no existe, debes crearla manualmente. La ruta completa debería ser `~/.kaggle/kaggle.json`.
+3. The `kaggle.json` file must be placed in a folder named `.kaggle` in your home directory.<br>Ensure that the `kaggle.json` file correctly contains your Kaggle API credentials.<br>If this folder does not exist, you must create it manually. The full path should be `~/.kaggle/kaggle.json`.
 
-- En sistemas Unix/Linux y macOS, `~` representa tu directorio de inicio. Puedes llegar a esta ubicación usando el comando `cd ~` en la terminal.
-- En Windows, el directorio equivalente sería `C:\Users\tu_usuario\.kaggle\`.
-
+- On Unix/Linux and macOS systems, `~` represents your home directory. You can navigate to this location using the command `cd ~` in the terminal.
+- On Windows, the equivalent directory would be `C:\Users\your_username\.kaggle\`.
 
 4. Create a .env with the following structure and your own tokens:
    ```bash
