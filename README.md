@@ -35,8 +35,19 @@ To run the notebooks and scripts in this repository, follow these steps:
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
+
+3. El archivo `kaggle.json` debe colocarse en una carpeta llamada `.kaggle` en tu directorio de inicio.<br>Asegúrate de que el archivo `kaggle.json` contenga correctamente tus credenciales de API de Kaggle.<br>Si esta carpeta no existe, debes crearla manualmente. La ruta completa debería ser `~/.kaggle/kaggle.json`.
+
+- En sistemas Unix/Linux y macOS, `~` representa tu directorio de inicio. Puedes llegar a esta ubicación usando el comando `cd ~` en la terminal.
+- En Windows, el directorio equivalente sería `C:\Users\tu_usuario\.kaggle\`.
+
+
+4. Create a .env with the following structure and your own tokens:
+   ```bash
+   AWS_ACCESS_KEY_ID = ''
+   AWS_SECRET_ACCESS_KEY = ''
    
-3. Navigate to the **main.py** script and execute it.<br>
+5. Navigate to the **main.py** script and execute it.<br>
 Then access the **model/** directory to open the Jupyter Notebook with the transformed data and proceed with the analysis, model training, and evaluation.<br>
 Execute the notebook in sequential order to reproduce the analysis, model training, and evaluation.
 
