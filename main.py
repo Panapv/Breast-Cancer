@@ -1,5 +1,6 @@
 from Handler import HandlerBranchCode
 from S3Client import S3Client
+from tests.DataQualityTester import DataQualityTester
 import os
 
 def main():
@@ -21,7 +22,10 @@ def main():
 
     path_business = HandlerBranchCode.partition_folder(os.path.join('.', 'data', 'business'))
     business_files_path = HandlerBranchCode.transform_data(os.path.join('.', 'data', 'staging'), path_business, spark)
-    s3.upload_files(bucket_name, business_files_path[0], os.path.join('business', business_files_path[1]))
+    dataTester = DataQualityTester(business_files_path[0])
+    data_is_valid = dataTester.test_data(print_results=True)
+    if data_is_valid:
+        s3.upload_files(bucket_name, business_files_path[0], os.path.join('business', business_files_path[1]))
 
     spark.stop()
 
