@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>S3Client &mdash; Breast-Cancer-Documentation 1.0.0 documentation</title>
+  <title>S3Client &mdash; Breast Cancer Documentation 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -31,7 +31,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            Breast-Cancer-Documentation
+            Breast Cancer Documentation
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -52,7 +52,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Breast-Cancer-Documentation</a>
+          <a href="../index.html">Breast Cancer Documentation</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -96,7 +96,7 @@
 <div class="viewcode-block" id="S3Client.upload_files">
 <a class="viewcode-back" href="../S3Client.html#S3Client.S3Client.upload_files">[docs]</a>
     <span class="k">def</span> <span class="nf">upload_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">,</span> <span class="n">folder_path</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método sube los ficheros al bucket y carpeta indicados por parámetros.&quot;&quot;&quot;</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sube los ficheros al bucket y carpeta indicados por parámetros.&quot;&quot;&quot;</span> 
 
         <span class="n">folder_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s1">/&#39;</span> 
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Carpeta </span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2"> creada en el bucket </span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -117,7 +117,7 @@
 <div class="viewcode-block" id="S3Client.create_s3_bucket">
 <a class="viewcode-back" href="../S3Client.html#S3Client.S3Client.create_s3_bucket">[docs]</a>
     <span class="k">def</span> <span class="nf">create_s3_bucket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método crea un nuevo bucket en AWS.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crea un nuevo bucket en AWS.&quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">region</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AWS_REGION_NAME&#39;</span><span class="p">)</span>

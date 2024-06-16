@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Breast-Cancer &mdash; Breast-Cancer-Documentation 1.0.0 documentation</title>
+  <title>Breast-Cancer &mdash; Breast Cancer Documentation 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Handler module" href="Handler.html" />
-    <link rel="prev" title="Welcome to Breast-Cancer-Documentation’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Welcome to Breast Cancer Documentation’s documentation!" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            Breast-Cancer-Documentation
+            Breast Cancer Documentation
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -49,7 +49,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Breast-Cancer</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Handler.html">Handler module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="S3Client.html">S3Client module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
 </ul>
 </li>
 </ul>
@@ -60,7 +60,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Breast-Cancer-Documentation</a>
+          <a href="index.html">Breast Cancer Documentation</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -101,8 +101,35 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="main.html#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests.DataQualityTester">tests.DataQualityTester module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.DataQualityTester.DataQualityTester"><code class="docutils literal notranslate"><span class="pre">DataQualityTester</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#tests.DataQualityTester.DataQualityTester.format_is_valid"><code class="docutils literal notranslate"><span class="pre">DataQualityTester.format_is_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#tests.DataQualityTester.DataQualityTester.is_duplicates_free"><code class="docutils literal notranslate"><span class="pre">DataQualityTester.is_duplicates_free()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#tests.DataQualityTester.DataQualityTester.is_nulls_free"><code class="docutils literal notranslate"><span class="pre">DataQualityTester.is_nulls_free()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#tests.DataQualityTester.DataQualityTester.load_data"><code class="docutils literal notranslate"><span class="pre">DataQualityTester.load_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#tests.DataQualityTester.DataQualityTester.schema_is_valid"><code class="docutils literal notranslate"><span class="pre">DataQualityTester.schema_is_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#tests.DataQualityTester.DataQualityTester.test_data"><code class="docutils literal notranslate"><span class="pre">DataQualityTester.test_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests.Handler_test">tests.Handler_test module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.Handler_test.spark_session"><code class="docutils literal notranslate"><span class="pre">spark_session()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.Handler_test.test_clean_data"><code class="docutils literal notranslate"><span class="pre">test_clean_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.Handler_test.test_get_kaggle"><code class="docutils literal notranslate"><span class="pre">test_get_kaggle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.Handler_test.test_partition_folder"><code class="docutils literal notranslate"><span class="pre">test_partition_folder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.Handler_test.test_transform_data"><code class="docutils literal notranslate"><span class="pre">test_transform_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests.S3Client_test">tests.S3Client_test module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.S3Client_test.s3_client"><code class="docutils literal notranslate"><span class="pre">s3_client()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.S3Client_test.test_create_s3_bucket"><code class="docutils literal notranslate"><span class="pre">test_create_s3_bucket()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#tests.S3Client_test.test_upload_files"><code class="docutils literal notranslate"><span class="pre">test_upload_files()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -113,7 +140,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Breast-Cancer-Documentation’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Breast Cancer Documentation’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Handler.html" class="btn btn-neutral float-right" title="Handler module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Handler &mdash; Breast-Cancer-Documentation 1.0.0 documentation</title>
+  <title>Handler &mdash; Breast Cancer Documentation 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -31,7 +31,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            Breast-Cancer-Documentation
+            Breast Cancer Documentation
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -52,7 +52,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Breast-Cancer-Documentation</a>
+          <a href="../index.html">Breast Cancer Documentation</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -85,7 +85,7 @@
 <a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.newSession">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">newSession</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método crea una nueva sesión de Spark.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crea una nueva sesión de Spark.</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
 <span class="sd">            name (str): Nombre de la sesión de Spark</span>
@@ -108,7 +108,7 @@
 <a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.partition_folder">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">partition_folder</span><span class="p">(</span><span class="n">RUTA</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método crea carpetas en caso de que no existan.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Crea carpetas en caso de que no existan.</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
 <span class="sd">            RUTA (str): Ruta en la quieres crear la carpeta.</span>
@@ -125,7 +125,7 @@
 <a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.clean_data">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">clean_data</span><span class="p">(</span><span class="n">RUTA_OG</span><span class="p">,</span> <span class="n">RUTA_DEST</span><span class="p">,</span> <span class="n">SPARK</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método limpia y guarda los datos en la capa de staging.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Limpia y guarda los datos en la capa de staging.</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
 <span class="sd">            RUTA_OG (str): Ruta origen de los datos.\n </span>
@@ -157,7 +157,7 @@
 <a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.transform_data">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">transform_data</span><span class="p">(</span><span class="n">RUTA_OG</span><span class="p">,</span> <span class="n">RUTA_DEST</span><span class="p">,</span> <span class="n">SPARK</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método transfoma los datos para adaptarse a nuestro modelo de negocio y los guarda en la capa de business.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Transfoma los datos para adaptarse a nuestro modelo de negocio y los guarda en la capa de business.</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
 <span class="sd">            RUTA_OG (str): Ruta origen de los datos.\n </span>
@@ -195,7 +195,7 @@
 <a class="viewcode-back" href="../Handler.html#Handler.HandlerBranchCode.get_kaggle">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_kaggle</span><span class="p">():</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Este método accede a la API de Kaggle y carga los datos en la capa raw.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Accede a la API de Kaggle y carga los datos en la capa raw.&quot;&quot;&quot;</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pasando a la capa Raw...&#39;</span><span class="p">)</span>
         <span class="n">dataset_name</span> <span class="o">=</span> <span class="s1">&#39;uciml/breast-cancer-wisconsin-data&#39;</span>

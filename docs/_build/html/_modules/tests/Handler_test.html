@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tests.Handler_test &mdash; Breast Cancer Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Breast Cancer Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Breast-Cancer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Breast Cancer Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.Handler_test</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tests.Handler_test</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">patch</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">Handler</span> <span class="kn">import</span> <span class="n">HandlerBranchCode</span>
+
+<div class="viewcode-block" id="spark_session">
+<a class="viewcode-back" href="../../tests.html#tests.Handler_test.spark_session">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">spark_session</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Configuración de la sesión de Spark.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span> \
+        <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;pytest-pyspark-testing&quot;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local[*]&quot;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+    <span class="k">yield</span> <span class="n">spark</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="test_partition_folder">
+<a class="viewcode-back" href="../../tests.html#tests.Handler_test.test_partition_folder">[docs]</a>
+<span class="k">def</span> <span class="nf">test_partition_folder</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Comprueba que os.makedirs se haya llamado con los argumentos correctos.\n</span>
+<span class="sd">    Comprueba que el resultado sea la ruta esperada.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">test_path</span> <span class="o">=</span> <span class="n">tmpdir</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;test_folder&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;os.makedirs&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_makedirs</span><span class="p">:</span>
+        <span class="n">returned_path</span> <span class="o">=</span> <span class="n">HandlerBranchCode</span><span class="o">.</span><span class="n">partition_folder</span><span class="p">(</span><span class="n">test_path</span><span class="p">)</span>
+
+        <span class="n">mock_makedirs</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">test_path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">returned_path</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">test_path</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="test_clean_data">
+<a class="viewcode-back" href="../../tests.html#tests.Handler_test.test_clean_data">[docs]</a>
+<span class="k">def</span> <span class="nf">test_clean_data</span><span class="p">(</span><span class="n">spark_session</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verifica que el archivo parquet se haya escrito en la ruta destino.\n</span>
+<span class="sd">    Verifica que la versión sea correcta y por lo tanto el conteo de directorios también lo es.\n</span>
+<span class="sd">    Verifica que los datos se hayan escrito correctamente en formato parquet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Se crean directorios temporales para rutas de prueba</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">ruta_og</span><span class="p">,</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">ruta_dest</span><span class="p">:</span>
+        
+        <span class="c1"># Se crea un archivo CSV temporal en la ruta origen</span>
+        <span class="n">csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ruta_og</span><span class="p">,</span> <span class="s1">&#39;breast_cancer.csv&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;id,value</span><span class="se">\n</span><span class="s2">1,foo</span><span class="se">\n</span><span class="s2">2,bar</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Se ejecuta el método clean_data</span>
+        <span class="n">ruta_destino</span><span class="p">,</span> <span class="n">version</span> <span class="o">=</span> <span class="n">HandlerBranchCode</span><span class="o">.</span><span class="n">clean_data</span><span class="p">(</span><span class="n">ruta_og</span><span class="p">,</span> <span class="n">ruta_dest</span><span class="p">,</span> <span class="n">spark_session</span><span class="p">)</span>
+        
+        <span class="c1"># Verifica que el archivo parquet se haya escrito en la ruta destino</span>
+        <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ruta_destino</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">ruta_destino</span><span class="p">)</span>
+        
+        <span class="c1"># Verificar que la versión sea correcta y por lo tanto el conteo de directorios también lo es</span>
+        <span class="k">assert</span> <span class="n">version</span> <span class="o">==</span> <span class="sa">f</span><span class="s1">&#39;breast_cancer_0&#39;</span>
+        
+        <span class="c1"># Verifica que los datos se hayan escrito correctamente en formato parquet</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">ruta_destino</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;foo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span></div>
+
+       
+<div class="viewcode-block" id="test_transform_data">
+<a class="viewcode-back" href="../../tests.html#tests.Handler_test.test_transform_data">[docs]</a>
+<span class="k">def</span> <span class="nf">test_transform_data</span><span class="p">(</span><span class="n">spark_session</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verifica que el archivo parquet se haya escrito en la ruta destino.\n</span>
+<span class="sd">    Verifica que la versión sea correcta y por lo tanto el conteo de directorios también lo es.\n</span>
+<span class="sd">    Verifica que los datos se hayan transformado correctamente</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Crea directorios temporales para rutas de prueba</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">ruta_og</span><span class="p">,</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">ruta_dest</span><span class="p">:</span>
+        <span class="c1"># Crea un DataFrame de prueba y lo escribe como parquet</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">13.0</span><span class="p">,</span> <span class="mf">14.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">17.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">19.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">21.0</span><span class="p">,</span> <span class="mf">22.0</span><span class="p">,</span> <span class="mf">23.0</span><span class="p">,</span> <span class="mf">24.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">26.0</span><span class="p">,</span> <span class="mf">27.0</span><span class="p">,</span> <span class="mf">28.0</span><span class="p">,</span> <span class="mf">29.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">6.1</span><span class="p">,</span> <span class="mf">7.1</span><span class="p">,</span> <span class="mf">8.1</span><span class="p">,</span> <span class="mf">9.1</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mf">11.1</span><span class="p">,</span> <span class="mf">12.1</span><span class="p">,</span> <span class="mf">13.1</span><span class="p">,</span> <span class="mf">14.1</span><span class="p">,</span> <span class="mf">15.1</span><span class="p">,</span> <span class="mf">16.1</span><span class="p">,</span> <span class="mf">17.1</span><span class="p">,</span> <span class="mf">18.1</span><span class="p">,</span> <span class="mf">19.1</span><span class="p">,</span> <span class="mf">20.1</span><span class="p">,</span> <span class="mf">21.1</span><span class="p">,</span> <span class="mf">22.1</span><span class="p">,</span> <span class="mf">23.1</span><span class="p">,</span> <span class="mf">24.1</span><span class="p">,</span> <span class="mf">25.1</span><span class="p">,</span> <span class="mf">26.1</span><span class="p">,</span> <span class="mf">27.1</span><span class="p">,</span> <span class="mf">28.1</span><span class="p">,</span> <span class="mf">29.1</span><span class="p">,</span> <span class="mf">30.1</span><span class="p">)]</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span><span class="s2">&quot;radius_mean&quot;</span><span class="p">,</span><span class="s2">&quot;texture_mean&quot;</span><span class="p">,</span><span class="s2">&quot;perimeter_mean&quot;</span><span class="p">,</span><span class="s2">&quot;area_mean&quot;</span><span class="p">,</span><span class="s2">&quot;smoothness_mean&quot;</span><span class="p">,</span><span class="s2">&quot;compactness_mean&quot;</span><span class="p">,</span><span class="s2">&quot;concavity_mean&quot;</span><span class="p">,</span><span class="s2">&quot;concave points_mean&quot;</span><span class="p">,</span><span class="s2">&quot;symmetry_mean&quot;</span><span class="p">,</span><span class="s2">&quot;fractal_dimension_mean&quot;</span><span class="p">,</span><span class="s2">&quot;radius_se&quot;</span><span class="p">,</span><span class="s2">&quot;texture_se&quot;</span><span class="p">,</span><span class="s2">&quot;perimeter_se&quot;</span><span class="p">,</span><span class="s2">&quot;area_se&quot;</span><span class="p">,</span><span class="s2">&quot;smoothness_se&quot;</span><span class="p">,</span><span class="s2">&quot;compactness_se&quot;</span><span class="p">,</span><span class="s2">&quot;concavity_se&quot;</span><span class="p">,</span><span class="s2">&quot;concave points_se&quot;</span><span class="p">,</span><span class="s2">&quot;symmetry_se&quot;</span><span class="p">,</span><span class="s2">&quot;fractal_dimension_se&quot;</span><span class="p">,</span><span class="s2">&quot;radius_worst&quot;</span><span class="p">,</span><span class="s2">&quot;texture_worst&quot;</span><span class="p">,</span><span class="s2">&quot;perimeter_worst&quot;</span><span class="p">,</span><span class="s2">&quot;area_worst&quot;</span><span class="p">,</span><span class="s2">&quot;smoothness_worst&quot;</span><span class="p">,</span><span class="s2">&quot;compactness_worst&quot;</span><span class="p">,</span><span class="s2">&quot;concavity_worst&quot;</span><span class="p">,</span><span class="s2">&quot;concave points_worst&quot;</span><span class="p">,</span><span class="s2">&quot;symmetry_worst&quot;</span><span class="p">,</span><span class="s2">&quot;fractal_dimension_worst&quot;</span><span class="p">]</span>
+        
+        <span class="n">df</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ruta_og</span><span class="p">,</span> <span class="s1">&#39;breast_cancer_0&#39;</span><span class="p">))</span>
+
+        <span class="c1"># Ejecuta el método transform_data</span>
+        <span class="n">ruta_destino</span><span class="p">,</span> <span class="n">version</span> <span class="o">=</span> <span class="n">HandlerBranchCode</span><span class="o">.</span><span class="n">transform_data</span><span class="p">(</span><span class="n">ruta_og</span><span class="p">,</span> <span class="n">ruta_dest</span><span class="p">,</span> <span class="n">spark_session</span><span class="p">)</span>
+        
+        <span class="c1"># Verifica que el archivo parquet se haya escrito en la ruta destino</span>
+        <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ruta_destino</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">ruta_destino</span><span class="p">)</span>
+        
+        <span class="c1"># Verificar que la versión sea correcta y por lo tanto el conteo de directorios también lo es</span>
+        <span class="k">assert</span> <span class="n">version</span> <span class="o">==</span> <span class="sa">f</span><span class="s1">&#39;breast_cancer_0&#39;</span>
+        
+        <span class="c1"># Verifica que los datos se hayan transformado correctamente</span>
+        <span class="n">df_transformed</span> <span class="o">=</span> <span class="n">spark_session</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">ruta_destino</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">df_transformed</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df_transformed</span><span class="o">.</span><span class="n">Diagnóstico</span> <span class="o">==</span> <span class="s2">&quot;Maligno&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">df_transformed</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df_transformed</span><span class="o">.</span><span class="n">Diagnóstico</span> <span class="o">==</span> <span class="s2">&quot;Benigno&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="s2">&quot;Diagnóstico&quot;</span> <span class="ow">in</span> <span class="n">df_transformed</span><span class="o">.</span><span class="n">columns</span>
+        <span class="k">assert</span> <span class="s2">&quot;Radio medio&quot;</span> <span class="ow">in</span> <span class="n">df_transformed</span><span class="o">.</span><span class="n">columns</span>
+        <span class="k">assert</span> <span class="s2">&quot;Textura media&quot;</span> <span class="ow">in</span> <span class="n">df_transformed</span><span class="o">.</span><span class="n">columns</span></div>
+
+
+<div class="viewcode-block" id="test_get_kaggle">
+<a class="viewcode-back" href="../../tests.html#tests.Handler_test.test_get_kaggle">[docs]</a>
+<span class="k">def</span> <span class="nf">test_get_kaggle</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verifica que la función de descarga se llamó con los argumentos correctos.\n</span>
+<span class="sd">    Verifica que se haya renombrado un archivo en la carpeta raw.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Ruta de descarga simulada y dataset simulado</span>
+    <span class="n">download_path</span> <span class="o">=</span> <span class="s1">&#39;./data/raw&#39;</span>
+    <span class="n">dataset_name</span> <span class="o">=</span> <span class="s1">&#39;uciml/breast-cancer-wisconsin-data&#39;</span>
+    
+    <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;kaggle.api.dataset_download_files&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_download_files</span><span class="p">:</span>
+        <span class="c1"># Simulamos la descarga</span>
+        <span class="n">mock_download_files</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="c1"># Ejecutamos el método get_kaggle</span>
+        <span class="n">HandlerBranchCode</span><span class="o">.</span><span class="n">get_kaggle</span><span class="p">()</span>
+        
+        <span class="c1"># Verificamos que la función de descarga se llamó con los argumentos correctos</span>
+        <span class="n">mock_download_files</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">download_path</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Verificamos que se haya renombrado un archivo en la carpeta raw</span>
+        <span class="k">assert</span> <span class="nb">any</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;breast_cancer&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">download_path</span><span class="p">))</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, VAPEPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

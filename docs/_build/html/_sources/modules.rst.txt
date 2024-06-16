@@ -6,4 +6,4 @@ Breast-Cancer
 
    Handler
    S3Client
-   main
+   tests

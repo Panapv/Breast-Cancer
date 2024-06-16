@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Handler module &mdash; Breast-Cancer-Documentation 1.0.0 documentation</title>
+  <title>Handler module &mdash; Breast Cancer Documentation 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -34,7 +34,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            Breast-Cancer-Documentation
+            Breast Cancer Documentation
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -59,7 +59,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="S3Client.html">S3Client module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
 </ul>
 </li>
 </ul>
@@ -70,7 +70,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Breast-Cancer-Documentation</a>
+          <a href="index.html">Breast Cancer Documentation</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -98,7 +98,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="Handler.HandlerBranchCode.clean_data">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RUTA_OG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RUTA_DEST</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SPARK</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Handler.html#HandlerBranchCode.clean_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Handler.HandlerBranchCode.clean_data" title="Link to this definition"></a></dt>
-<dd><p>Este método limpia y guarda los datos en la capa de staging.</p>
+<dd><p>Limpia y guarda los datos en la capa de staging.</p>
 <dl>
 <dt>Args:</dt><dd><p>RUTA_OG (str): Ruta origen de los datos.</p>
 <p>RUTA_DEST (str): Ruta destino de los datos.</p>
@@ -113,13 +113,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="Handler.HandlerBranchCode.get_kaggle">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_kaggle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Handler.html#HandlerBranchCode.get_kaggle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Handler.HandlerBranchCode.get_kaggle" title="Link to this definition"></a></dt>
-<dd><p>Este método accede a la API de Kaggle y carga los datos en la capa raw.</p>
+<dd><p>Accede a la API de Kaggle y carga los datos en la capa raw.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Handler.HandlerBranchCode.newSession">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">newSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Handler.html#HandlerBranchCode.newSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Handler.HandlerBranchCode.newSession" title="Link to this definition"></a></dt>
-<dd><p>Este método crea una nueva sesión de Spark.</p>
+<dd><p>Crea una nueva sesión de Spark.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>name (str): Nombre de la sesión de Spark</p>
 </dd>
@@ -131,7 +131,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="Handler.HandlerBranchCode.partition_folder">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">partition_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RUTA</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Handler.html#HandlerBranchCode.partition_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Handler.HandlerBranchCode.partition_folder" title="Link to this definition"></a></dt>
-<dd><p>Este método crea carpetas en caso de que no existan.</p>
+<dd><p>Crea carpetas en caso de que no existan.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>RUTA (str): Ruta en la quieres crear la carpeta.</p>
 </dd>
@@ -143,7 +143,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="Handler.HandlerBranchCode.transform_data">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transform_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RUTA_OG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RUTA_DEST</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SPARK</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Handler.html#HandlerBranchCode.transform_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Handler.HandlerBranchCode.transform_data" title="Link to this definition"></a></dt>
-<dd><p>Este método transfoma los datos para adaptarse a nuestro modelo de negocio y los guarda en la capa de business.</p>
+<dd><p>Transfoma los datos para adaptarse a nuestro modelo de negocio y los guarda en la capa de business.</p>
 <dl>
 <dt>Args:</dt><dd><p>RUTA_OG (str): Ruta origen de los datos.</p>
 <p>RUTA_DEST (str): Ruta destino de los datos.</p>
