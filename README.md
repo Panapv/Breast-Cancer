@@ -29,7 +29,6 @@ The dataset used for this project is the [Breast Cancer Wisconsin (Diagnostic) D
   Data is stored already transformed and structured in a way that is useful for analysis. These are the data we use for report generation in PowerBI.
 
 - **Model Development**: Implemented a machine learning pipeline using scikit-learn to train and validate several classification models:
-  - Random Forest Classifier
   - Random Forest Classifier with hyperparameter search engine
   - Neuronal Network
 - **Model Evaluation**: Evaluated models using metrics such as accuracy, precision, recall, and F1-score. Cross-validation and hyperparameter tuning were performed to optimize model performance.
