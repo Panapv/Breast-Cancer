@@ -9,6 +9,8 @@ The dataset used for this project is the [Breast Cancer Wisconsin (Diagnostic) D
 ## Project Structure
 - **data/**: Directory containing the dataset files divided into raw, staging, and business.
 - **docs/**: Contains the files required for Sphinx to work.
+- **PowerBI/**: Contains the PowerBI dashboard with the metrics of our dataset and the model used in the prediction page of the dashboard.<br><br>
+(In order to correctly visualize the python visual of the prediction page, you must manually modify the path in which we have saved in model **model_rf.pkl** from the visual code. And run it from the PowerBI Desktop so that the object can access the model that we have locally.)<br><br>
 - **model/**:
   - `Jupyter notebook`: Used for data exploration, preprocessing, model development, and evaluation. Contains the report about the models.
   - **models/**: Saved models after training.
@@ -58,6 +60,8 @@ To run the notebooks and scripts in this repository, follow these steps:
 5. Navigate to the **main.py** script and execute it.<br>
 Then access the **model/** directory to open the Jupyter Notebook with the transformed data and proceed with the analysis, model training, and evaluation.<br>
 Execute the notebook in sequential order to reproduce the analysis, model training, and evaluation.
+
+6. In order to fully run the notebook it is necessary to have an account in the **Weights & Biases**. And manually enter the token when the IDE asks for it.
 
 ## Results
 
