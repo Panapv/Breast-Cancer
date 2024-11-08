@@ -3,7 +3,7 @@
 ## Overview
 This repository contains code and resources for a predictive model that determines whether a breast tumor is benign or malignant. The model is built using machine learning techniques on the Breast Cancer Wisconsin (Diagnostic) Dataset from Kaggle.
 
-This is the link to our [PRESENTATION](https://teams.microsoft.com/l/message/19:ffa691e8918948d0ab7f017792285d2e@thread.v2/1718708451019?context=%7B%22contextType%22%3A%22chat%22%7D).
+This is the link to our [PRESENTATION](https://www.canva.com/design/DAGIF6BYQO0/qSFvm4kqWXHB_q19sQE8Ew/view).
 
 ## Dataset
 The dataset used for this project is the [Breast Cancer Wisconsin (Diagnostic) Dataset](https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data) from Kaggle. It includes features computed from digitized images of breast mass and aims to classify tumors into benign and malignant categories based on these features.
